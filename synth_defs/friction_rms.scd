@@ -1,9 +1,7 @@
 	SynthDef(\friction_fft_1_rms, {
 		arg bufnum1, bufnum2, amp=(-3), mass=1.0, lpf_freq=10000, noise_speed=20, atk=0.05, dec=0.1, sus=1, rel=0.05, curve=(-10), gate=1, line_start=(-1), line_end=1, line_dur=10, mix_low=(-1.0), mix_high=(-1.0), input_bus, out, smooth_speed=5,smooth_max=0.1, fx_out=~empty_bus, fft_mix=1.0;
 		var sig, in, kernel, env, chain, fft_sig, sig_mix, trig;
-		in = In.ar(input_bus); // replace with soundin for live sound
-
-
+		in = In.ar(input_bus);
 		env = EnvGen.kr(Env.adsr(atk, dec, sus, rel, curve: curve), gate, doneAction: 2);
 		//FRIC//
 		sig = Friction.ar(in,
@@ -12,7 +10,6 @@
 			spring: RMS.kr(in).linlin(0.0, 0.1, 0.4, 0.1).clip(lo: 0.1, hi: 0.4));
 		sig = LPF.ar(sig, lpf_freq);
 		sig = Limiter.ar(sig, 0.9);
-
 		//FFT//
 		chain = FFT(LocalBuf(512), in);
 		trig = Onsets.kr(chain, 0.01);
@@ -21,8 +18,6 @@
 	    fft_sig = IFFT(chain);
 
 		sig_mix = XFade2.ar(sig, fft_sig, fft_mix);
-
 		sig_mix = sig_mix * amp.dbamp.lag(0.1) * env;
 		Out.ar(out, sig_mix);
-		//Out.ar(fx_out, sig_mix);
 	}).add;

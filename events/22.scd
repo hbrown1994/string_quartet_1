@@ -1,9 +1,6 @@
-	e.add(\22 -> {
-		c[1].children[21].value_(0);//Off
-	    c[1].children[22].value_(1);//On
-		/*dsp here*/
-		//update ~glitch_loops
-		//viola
+e.add(\22 -> {
+		c[1].children[21].value_(0);//Previous Cue Button Off
+	    c[1].children[22].value_(1);//Current Cue Button On
 
 		~cello_glitch.set(\gate, 0);
 
@@ -31,5 +28,4 @@
 				\group, ~patterns,
 			);
 		).play(TempoClock(1));
-
-	});
+});

@@ -1,8 +1,6 @@
-	e.add(\26 -> {
-		c[1].children[25].value_(0);//Off
-	    c[1].children[26].value_(1);//On
-		/*dsp here*/
-		//update ~glitch_loops
+e.add(\26 -> {
+		c[1].children[25].value_(0);//Previous Cue Button Off
+	    c[1].children[26].value_(1);//Current Cue Button On
 
 			~glitch_loops= Pdef(
 			\glitch1,
@@ -27,15 +25,14 @@
 			);
 		).play(TempoClock(1));
 
-		~viola_glitch.set(\gate, 0);
+		    ~viola_glitch.set(\gate, 0);
 
-		~reverb = Synth(\reverb, [\amp, ~reverb_numBox.value, \gate, 1, \atk, 12, \dec, 1, \sus, 1, \rel, 0.05, \input_bus, ~cello_fx_send, \out, ~cello_out], target: ~fx).register;
+		    ~reverb = Synth(\reverb, [\amp, ~reverb_numBox.value, \gate, 1, \atk, 12, \dec, 1, \sus, 1, \rel, 0.05, \input_bus, ~cello_fx_send, \out, ~cello_out], target: ~fx).register;
 
-		~reverb_violin_1 = Synth(\reverb, [\amp, ~reverb_numBox.value, \gate, 1, \atk, 12, \dec, 1, \sus, 1, \rel, 0.05, \input_bus, ~violin_1_fx_send, \out, ~violin_1_out], target: ~fx).register;
+		    ~reverb_violin_1 = Synth(\reverb, [\amp, ~reverb_numBox.value, \gate, 1, \atk, 12, \dec, 1, \sus, 1, \rel, 0.05, \input_bus, ~violin_1_fx_send, \out, ~violin_1_out], target: ~fx).register;
 
-		~reverb_violin_2 = Synth(\reverb, [\amp, ~reverb_numBox.value, \gate, 1, \atk, 12, \dec, 1, \sus, 1, \rel, 0.05, \input_bus, ~violin_2_fx_send, \out, ~violin_2_out], target: ~fx).register;
+		    ~reverb_violin_2 = Synth(\reverb, [\amp, ~reverb_numBox.value, \gate, 1, \atk, 12, \dec, 1, \sus, 1, \rel, 0.05, \input_bus, ~violin_2_fx_send, \out, ~violin_2_out], target: ~fx).register;
 
-	    ~reverb_viola = Synth(\reverb, [\amp, ~reverb_numBox.value, \gate, 1, \atk, 12, \dec, 1, \sus, 1, \rel, 0.05, \input_bus, ~viola_fx_send, \out, ~viola_out], target: ~fx).register;
+	        ~reverb_viola = Synth(\reverb, [\amp, ~reverb_numBox.value, \gate, 1, \atk, 12, \dec, 1, \sus, 1, \rel, 0.05, \input_bus, ~viola_fx_send, \out, ~viola_out], target: ~fx).register;
 
-
-	});
+});

@@ -1,24 +1,20 @@
-	e.add(\23 -> {
-		c[1].children[22].value_(0);//Off
-	    c[1].children[23].value_(1);//On
-		/*dsp here*/
-		//update ~glitch_loops
+e.add(\23 -> {
+		c[1].children[22].value_(0);//Previous Cue Button Off
+	    c[1].children[23].value_(1);//Current Cue Button On
 
 		Routine({
 
-		~viola_ntube_1.set(\gate, 0);
-		~cello_ntube_1.set(\gate, 0);
+		    ~viola_ntube_1.set(\gate, 0);
+		    ~cello_ntube_1.set(\gate, 0);
 
 
-	    ~friction_violin_1.set(\lpf_freq, 18000, \noise_speed, 600, \fft_mix, 1.0);
+	        ~friction_violin_1.set(\lpf_freq, 18000, \noise_speed, 600, \fft_mix, 1.0);
 
-		~friction_violin_2.set(\lpf_freq, 17000, \noise_speed, 10000, \fft_mix, -1.0);
+		    ~friction_violin_2.set(\lpf_freq, 17000, \noise_speed, 10000, \fft_mix, -1.0);
 
-		~cello_glitch = Synth(\grain_delay, [\amp, ~cello_glitch_numBox.value, \in_bus, ~cello_fx_send, \grain_trig_low, 1, \grain_trig_high, 10, \grain_dev, 1, \grain_size_low, 0.01, \grain_size_high, 0.05, \trig_fft_low, 5, \trig_fft_high, 20, \fft_dev, 1, \trig_freeze_low, 2, \trig_freeze_high, 20, \freeze_dev, 1, \trig_freq_low, 5, \trig_freq_high, 50, \atk, 3, \dec, 0.1, \sus, 1, \rel, 0.05, \gate, 1, \out, ~cello_out], target: ~fx).register;
+		    ~cello_glitch = Synth(\grain_delay, [\amp, ~cello_glitch_numBox.value, \in_bus, ~cello_fx_send, \grain_trig_low, 1, \grain_trig_high, 10, \grain_dev, 1, \grain_size_low, 0.01, \grain_size_high, 0.05, \trig_fft_low, 5, \trig_fft_high, 20, \fft_dev, 1, \trig_freeze_low, 2, \trig_freeze_high, 20, \freeze_dev, 1, \trig_freq_low, 5, \trig_freq_high, 50, \atk, 3, \dec, 0.1, \sus, 1, \rel, 0.05, \gate, 1, \out, ~cello_out], target: ~fx).register;
 
-
-		//add amp control
-		~glitch_loops= Pdef(
+		    ~glitch_loops= Pdef(
 			\glitch1,
 			Pbind(
 				\instrument, \pattern_buf,
@@ -43,10 +39,10 @@
 
 
 
-		~viola_glitch.set(\gate, 0);
+		    ~viola_glitch.set(\gate, 0);
 
 
-     	~metal_stream = Pdef(
+     	    ~metal_stream = Pdef(
 			\metal1,
 			Pbind(
 				\instrument, \pattern_buf,
@@ -69,17 +65,12 @@
 			);
 		).play(TempoClock(1));
 
-
-
-
 		s.sync;
 
-		~viola_ntube = Synth(\ntube_7, [\amp, ~tube_delay_numBox.value, \mix_low, -1.0, \mix_high, -1.0, \input_bus, ~viola_fx_send, \atk, 10, \dec, 0.1, \sus, 1, \rel, 10, \gate, 1, \out, ~viola_out], target: ~fx).register;
+		    ~viola_ntube = Synth(\ntube_7, [\amp, ~tube_delay_numBox.value, \mix_low, -1.0, \mix_high, -1.0, \input_bus, ~viola_fx_send, \atk, 10, \dec, 0.1, \sus, 1, \rel, 10, \gate, 1, \out, ~viola_out], target: ~fx).register;
 
-		~cello_ntube = Synth(\ntube_8, [\amp, ~tube_delay_numBox.value, \mix_low, -1.0, \mix_high, -1.0, \input_bus, ~cello_fx_send, \atk, 10, \dec, 0.1, \sus, 1, \rel, 10, \gate, 1, \out, ~cello_out], target: ~fx).register;
+		    ~cello_ntube = Synth(\ntube_8, [\amp, ~tube_delay_numBox.value, \mix_low, -1.0, \mix_high, -1.0, \input_bus, ~cello_fx_send, \atk, 10, \dec, 0.1, \sus, 1, \rel, 10, \gate, 1, \out, ~cello_out], target: ~fx).register;
 
 		}).play(AppClock);
 
-
-
-	});
+});

@@ -1,7 +1,7 @@
 	SynthDef(\ntube_fft_1_rms, {
 		arg amp=(-3), loss=0.99, atk=0.05, dec=0.1, sus=1, rel=0.05, curve=(-10), gate=1, line_start=(-1), line_end=1, line_dur=10, mix_low=(-1.0), mix_high=(-1.0), input_bus, out;
 		var sig, in, freq, hasFreq, env, chain, fft_sig, sig_mix;
-		in = In.ar(input_bus); // replace with soundin for live sound
+		in = In.ar(input_bus);
 		env = EnvGen.kr(Env.adsr(atk, dec, sus, rel, curve: curve), gate, doneAction: 2);
 		# freq, hasFreq = Pitch.kr(in, ampThreshold: 0.02, median: 7);
 		in = HPF.ar(in, 50);
@@ -9,6 +9,7 @@
 		sig = Limiter.ar(sig, 0.7);
 		sig = sig * RMS.kr(in).linlin(0.0, 0.1, 0.0, 0.8).clip(0.0, 0.8).lag(0.1);
 		sig = HPF.ar(sig, 100);
+
 		//FFT//
 		chain = FFT(LocalBuf(1024), sig);
 		chain = PV_MagSmooth(chain, 1 - RMS.ar(in).linlin(0.0, 0.1, 0.00001, 0.5));

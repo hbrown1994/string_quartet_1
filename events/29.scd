@@ -1,6 +1,6 @@
-	e.add(\29 -> {
-		c[1].children[28].value_(0);//Off
-	    c[1].children[29].value_(1);//On
+e.add(\29 -> {
+		c[1].children[28].value_(0);//Previous Cue Button Off
+	    c[1].children[29].value_(1);//Current Cue Button On
 
 		~contact_mic_1.set(\gate, 0);
 
@@ -27,4 +27,4 @@
 		);
 		).play(TempoClock(1));
 
-	});
+});

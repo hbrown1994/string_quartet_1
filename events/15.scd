@@ -1,7 +1,7 @@
-	e.add(\15 -> {
+e.add(\15 -> {
 
-		c[1].children[14].value_(0);//Off
-	    c[1].children[15].value_(1);//On
+		c[1].children[14].value_(0);//Previous Cue Button Off
+	    c[1].children[15].value_(1);//Current Cue Button On
 
 		~contact_mic_1.set(\gate, 0);
 
@@ -17,4 +17,4 @@
 
 		~delay.set(\gate, 0);
 
-	});
+});

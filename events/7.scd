@@ -1,7 +1,8 @@
-	e.add(\7 -> {
 
-    c[1].children[6].value_(0);//Off
-	c[1].children[7].value_(1);//On
+e.add(\7 -> {
+
+    c[1].children[6].value_(0);//Previous Cue Button Off
+	c[1].children[7].value_(1);//Current Cue Button On
 
 
 	~glitch_stream = Pdef(

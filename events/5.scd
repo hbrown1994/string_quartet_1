@@ -1,8 +1,9 @@
-	e.add(\5 -> {
+e.add(\5 -> {
 
-	"cue 4".postln;
-	c[1].children[4].value_(0);//Off
-	c[1].children[5].value_(1);//On
+
+	c[1].children[4].value_(0);//Previous Cue Button Off
+	c[1].children[5].value_(1);//Current Cue Button On
+
 	~ringmod_cello.set(\gate, 0);
 	~ringmod_viola.set(\gate, 0);
 	~violin_2_glitch.set(\gate, 0);

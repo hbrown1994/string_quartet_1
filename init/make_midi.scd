@@ -1,3 +1,11 @@
+//Connect MIDI controllers
+
+	MIDIClient.init(4, 4, verbose: true);
+
+	MIDIIn.connectAll;
+
+
+//MIDI functions for real-time control during the performance.
 
 	MIDIdef.cc(\knob_1, {
 		arg val;

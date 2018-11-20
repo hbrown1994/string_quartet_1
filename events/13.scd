@@ -1,7 +1,7 @@
-	e.add(\13 -> {
+e.add(\13 -> {
 
-	c[1].children[12].value_(0);//Off
-	c[1].children[13].value_(1);//On
+	c[1].children[12].value_(0);//Previous Cue Button Off
+	c[1].children[13].value_(1);//Current Cue Button On
 
 
 	~low_freq_rumble = Pdef(
@@ -27,7 +27,5 @@
 		\group, ~patterns,
 		);
 		).play(TempoClock(1));
-
-
 
 });

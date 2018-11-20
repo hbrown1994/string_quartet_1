@@ -1,8 +1,8 @@
-	e.add(\36 -> {
-		c[1].children[35].value_(0);//Off
-	    c[1].children[36].value_(1);//On
+e.add(\36 -> {
+		c[1].children[35].value_(0);//Previous Cue Button Off
+	    c[1].children[36].value_(1);//Current Cue Button On
 
-		//alter processes
+
 		~ringmod_viola = Synth(\ringmod, [\amp, ~ringmod_viola_numBox.value, \out, ~viola_out, \in_bus, ~viola_fx_send, \low_pass_mix, 1, \high_pass_mix, 1, \high_pass_freq, 100, \low_pass_freq, 4000, \gate, 1, \buf, b[\cringle][0], \rate_low, 0.01, \rate_high, 1.0, \atk, 10, \dec, 0.1, \sus, 1, \rel, 0.1, \mul, 4], target: ~fx).register;
 
 

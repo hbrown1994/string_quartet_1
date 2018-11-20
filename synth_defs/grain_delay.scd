@@ -1,7 +1,6 @@
 	SynthDef(\grain_delay, {
 		arg trig_freq_low, trig_freq_high, grain_dev, trig_fft_low, trig_fft_high, fft_dev, trig_freeze_low, trig_freeze_high, freeze_dev, grain_size_low, grain_size_high, gate, amp, in_bus, morph_amount=1.0, atk, dec, sus, rel, curve=(-8), out;
 		var pan, env, in, sig, buf, temp, sig1, chain, sig2, fft_mix=0, trig, sig3, trig1, trig2, chainA, chainB;
-		//in = In.ar(in_bus);
 		in = In.ar(in_bus);
 		sig3=0;
 		sig1 =0;
@@ -31,5 +30,4 @@
         sig3 = Limiter.ar(sig3, 1.0);
 		sig3 = sig3 * env * amp.dbamp.lag(0.1);
 		Out.ar(out, sig3);
-		//Out.ar(0, buf*amp.dbamp.lag(0.1));
 	}).add;

@@ -1,6 +1,7 @@
-	e.add(\49 -> {
-		c[1].children[48].value_(0);//Off
-	    c[1].children[49].value_(1);//On
+e.add(\49 -> {
+
+		c[1].children[48].value_(0);//Previous Cue Button Off
+	    c[1].children[49].value_(1);//Current Cue Button On
 
 		~glitch_stream = Pdef(
 	\glitch1,
@@ -27,4 +28,4 @@
 
 	 ~cello_ntube = Synth(\ntube_5, [\amp, ~tube_delay_numBox.value, \mix_low, -1.0, \mix_high, -1.0, \input_bus, ~violin_1_fx_send, \atk, 10, \dec, 0.1, \sus, 1, \rel, 0.1, \gate, 1, \out, ~violin_1_out], target: ~fx).register; //violin_1
 
-	});
+});

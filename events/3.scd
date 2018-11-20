@@ -1,8 +1,7 @@
-	e.add(\3 -> {
+e.add(\3 -> {
 
-	"cue 2".postln;
-	c[1].children[2].value_(0);//Off
-	c[1].children[3].value_(1);//On
+	c[1].children[2].value_(0);//Previous Cue Button Off
+	c[1].children[3].value_(1);//Current Cue Button On
 
 	~glitch_stream = Pdef(
 	\glitch1,

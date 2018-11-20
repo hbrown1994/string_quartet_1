@@ -20,7 +20,6 @@ For more information, feel free to contact Hunter at hunterbrownmusic1@gmail.com
 /*_______________________________________________________________________________________________________________________________________________________________________________*/
 
 
-
 /*______________________________________________ 1. Server Configuration ______________________________________________*/
 s = Server.local;
 s.newBusAllocators;
@@ -34,14 +33,19 @@ o=s.options;
 o.memSize;
 o.memSize = 2.pow(20);
 
-/*______________________________________________ 2. Global Variables ______________________________________________*/
+/*______________________________________________ 2. Global Variables/Arrays ______________________________________________*/
 
+//String Inputs from Interface
 ~violin_1_in = 0;
 ~violin_2_in = 1;
 ~viola_in = 2;
 ~cello_in = 3;
+
+//Metal Sheet Contact Mic Inputs from Interface
 ~contact_mic_1_in = 4;
 ~contact_mic_2_in = 5;
+
+//Metal Sheet Contact Mic Outputs
 ~playback_out_1 = 0;
 ~playback_out_1 = 1;
 ~violin_1_out = 2;
@@ -51,15 +55,20 @@ o.memSize = 2.pow(20);
 ~sheet_1_out = 4;
 ~sheet_2_out = 5;
 ~sub_out = 6;
+
+//Init Cue Number and PFunc globals
 ~cue=0;
 ~glitch_stream_val = (-60);
 ~metal_stream_val = (-60);
 
+//INIT all Arrays
+thisProcess.interpreter.executeFile(~init_path++"make_arrays.scd");
+
+//Init File Paths
 ~buffers_path = PathName(thisProcess.nowExecutingPath).parentPath++"buffers/";
 ~synth_def_path = PathName(thisProcess.nowExecutingPath).parentPath++"synth_defs/";
 ~init_path = PathName(thisProcess.nowExecutingPath).parentPath++"init/";
 ~events_path = PathName(thisProcess.nowExecutingPath).parentPath++"events/";
-
 
 
 /*______________________________________________ 3. Buffers ______________________________________________*/
@@ -77,16 +86,12 @@ o.memSize = 2.pow(20);
     thisProcess.interpreter.executeFile(~init_path++"make_midi.scd");
 };
 
-/*______________________________________________ 6. Events/Arrays ______________________________________________*/
+/*______________________________________________ 6. Events ______________________________________________*/
 ~makeEvents = {
-
-	MIDIClient.init(4, 4, verbose: true);
-
-	MIDIIn.connectAll;
 
 	e = Dictionary.new;
 
-	thisProcess.interpreter.executeFile(~init_path++"make_arrays.scd");
+	//The below function adds all cues (or events) in the "events" folder to a dictionary array.
 
     PathName(~events_path).entries.size.do{
 
@@ -98,14 +103,15 @@ o.memSize = 2.pow(20);
 	};
 
 };
-
 /*______________________________________________ 7. GUI ______________________________________________*/
 ~makeGui = {
     thisProcess.interpreter.executeFile(~init_path++"make_gui.scd");
 };
 
 /*______________________________________________ 8. Cleanup ______________________________________________*/
-~cleanup = { // kills all processes on server quit
+
+// Remove all processes on server on quit.
+~cleanup = {
 	s.newBusAllocators;
 	ServerBoot.removeAll;
 	ServerTree.removeAll;
@@ -113,21 +119,20 @@ o.memSize = 2.pow(20);
 };
 
 
-
-ServerBoot.add(~makeGui);
-ServerBoot.add(~makeBuffers); // "ServerBoot" happens when server boots.
-ServerQuit.add(~cleanup); // "ServerQuit" happens when server is Quit.
+ServerBoot.add(~makeGui); // Make GUI when server boots.
+ServerBoot.add(~makeBuffers); // Make Buffers when server boots.
+ServerQuit.add(~cleanup); // Remove all processes on server on quit.
 
 /*______________________________________________ 9. Busses & SynthDefs ______________________________________________*/
 
-s.waitForBoot({ // Wait to boot server once contained functions have been evaluated.
+s.waitForBoot({ //Wait to boot server once contained functions have been evaluated.
+
+	//Make Busses
+    thisProcess.interpreter.executeFile(~init_path++"make_busses.scd");
 
 	s.sync;
 
-	//Busses Here
-    thisProcess.interpreter.executeFile(~init_path++"make_busses.scd");
-
-	s.sync; // Server syncs to language
+	//The below function adds all SynthDefs in the "synth_defs" folder to the server.
     PathName(~synth_def_path).entries.size.do{
 
 		arg count=0;
@@ -138,16 +143,13 @@ s.waitForBoot({ // Wait to boot server once contained functions have been evalua
 	};
 	s.sync;
 
-	//TreeAdds
-
     ServerTree.add(~makeNodes);
 	ServerTree.add(~makeMIDI);
 	ServerTree.add(~makeEvents);
-	s.freeAll; // Frees verver of any nodes. Then inits all instances on ServerTree (above).
+	s.freeAll;
 	s.sync;
 	s.meter;
 	"done".postln;
-
 });
 )
 

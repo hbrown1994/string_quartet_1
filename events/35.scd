@@ -1,8 +1,8 @@
-	e.add(\35 -> {
-		c[1].children[34].value_(0);//Off
-	    c[1].children[35].value_(1);//On
+e.add(\35 -> {
+		c[1].children[34].value_(0);//Previous Cue Button Off
+	    c[1].children[35].value_(1);//Current Cue Button On
 
-		//alter processes
+
 		~ringmod_violin_2 = Synth(\ringmod, [\amp, ~violin_2_ringmod_numBox.value, \out,~violin_2_out, \in_bus, ~violin_2_fx_send, \low_pass_mix, 1, \high_pass_mix, 1, \high_pass_freq, 450, \low_pass_freq, 6000, \gate, 1, \buf,m[\no_input_noise][11], \rate_low, 1, \rate_high, 1, \atk, 2, \dec, 0.1, \sus, 1, \rel, 0.1, \mul, 4], target: ~fx).register;
 
 		~soft_glitch = Pdef(
@@ -25,4 +25,4 @@
 		\group, ~patterns,
 		);
 		).play(TempoClock(1));
-	});
+});

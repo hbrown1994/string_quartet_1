@@ -1,7 +1,7 @@
-	e.add(\8 -> {
+e.add(\8 -> {
 
-	c[1].children[7].value_(0);//Off
-	c[1].children[8].value_(1);//On
+	c[1].children[7].value_(0);//Previous Cue Button Off
+	c[1].children[8].value_(1);//Current Cue Button On
 
 	~noise_1 = Synth(\playbuf, [\bufnum, b[\no_input_stable_drone][3], \loop, 1, \gate, 1,
 	\low_pass_freq, 300, \low_pass_mix, 1, \high_pass_mix, 0, \atk, 25 , \rel, 0.005, \amp, ~noise_1_numBox.value, \curve, -2], target: ~samples).register;

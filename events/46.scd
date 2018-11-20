@@ -1,6 +1,7 @@
-	e.add(\46 -> {
-		c[1].children[45].value_(0);//Off
-	    c[1].children[46].value_(1);//On
+e.add(\46 -> {
+
+		c[1].children[45].value_(0);//Previous Cue Button Off
+	    c[1].children[46].value_(1);//Current Cue Button On
 
 
 		~glitch_stream = Pdef(
@@ -25,14 +26,14 @@
 		);
 		).play(TempoClock(1));
 
-		 Routine({
-	~noise_2 = Synth(\playbuf, [\bufnum, b[\no_input_high][4], \loop, 1, \gate, 1,
+	 Routine({
+		~noise_2 = Synth(\playbuf, [\bufnum, b[\no_input_high][4], \loop, 1, \gate, 1,
 	\high_pass_freq, 500, \low_pass_mix, 0, \high_pass_mix, 1, \amp, ~noise_2_numBox.value, \atk, 100, \rel, 0.1, \curve, (-6)]).register;
 
-	~noise_1 = Synth(\playbuf, [\bufnum, b[\no_input_stable_drone][2], \loop, 1, \gate, 1,
+		~noise_1 = Synth(\playbuf, [\bufnum, b[\no_input_stable_drone][2], \loop, 1, \gate, 1,
 	\low_pass_freq, 300, \low_pass_mix, 1, \high_pass_mix, 0, \atk, 100 , \rel, 0.1, \amp, ~noise_1_numBox.value, \curve, (-6)], target: ~samples).register;
 
-   ~grit_noise_1 = Synth(\playbuf, [\bufnum, b[\no_input_gesture][2], \loop, 1, \gate, 1,
+		~grit_noise_1 = Synth(\playbuf, [\bufnum, b[\no_input_gesture][2], \loop, 1, \gate, 1,
 	\high_pass_freq, 100, \low_pass_mix, 0, \high_pass_mix, 1, \atk, 100, \rel, 0.1, \amp, ~noise_2_numBox.value, \curve, (-6)], target: ~samples).register;
 
 
@@ -45,4 +46,4 @@
 
 		}).play(AppClock);
 
-	});
+});

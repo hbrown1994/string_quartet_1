@@ -1,7 +1,8 @@
-	e.add(\27 -> {
-		c[1].children[26].value_(0);//Off
-	    c[1].children[27].value_(1);//On
-		/*dsp here*/
+e.add(\27 -> {
+
+		c[1].children[26].value_(0);//Previous Cue Button Off
+	    c[1].children[27].value_(1);//Current Cue Button On
+
 
 		~sub = Synth(\sub, [\amp,  ~sub_numBox.value, \gate, 1, \out_bus, ~sub_out]).register;
 
@@ -12,7 +13,7 @@
 		~contact_mic_1.set(\gate, 0);
 
 
-			~glitch_loops= Pdef(
+		~glitch_loops= Pdef(
 			\glitch1,
 			Pbind(
 				\instrument, \pattern_buf,
@@ -36,48 +37,48 @@
 			);
 		).play(TempoClock(1));
 
-		~metal_stream = Pdef(
-	\metal1,
-	Pbind(
-		\instrument, \pattern_buf,
-		\dur, Pwhite(0.01, 0.1),
-		\atk, Pwhite(0.05, 0.01),
-		\rel, Pwhite(2, 4),
-		\buf, Prand(m[\cringle][(0..0)]++m[\shake][(0..3)], inf),
-		\rate,Pseg(Pseq([3.0, 0.5], 1), Pseq([20, 20], 1), -10),
-		\spos, Pwhite(0, 10000),
-		\amp, Pseg(Pseq([Pfunc({~metal_stream_val}), 0.1], 1), Pseq([20, 20], 1), -10),
-		\loop, 1,
-		\pan_pos, Pwhite(-1.0, 1.0),
-		\low_pass_mix, 1,
-		\low_pass_freq, Pseg(Pseq([13000, 8000], 1), Pseq([20, 20], 1), -10),
-		\high_pass_mix, 1,
-		\high_pass_freq, 30,
-		\out, 0,
-		\group, ~patterns,
+	~metal_stream = Pdef(
+		\metal1,
+		Pbind(
+			\instrument, \pattern_buf,
+			\dur, Pwhite(0.01, 0.1),
+			\atk, Pwhite(0.05, 0.01),
+			\rel, Pwhite(2, 4),
+			\buf, Prand(m[\cringle][(0..0)]++m[\shake][(0..3)], inf),
+			\rate,Pseg(Pseq([3.0, 0.5], 1), Pseq([20, 20], 1), -10),
+			\spos, Pwhite(0, 10000),
+			\amp, Pseg(Pseq([Pfunc({~metal_stream_val}), 0.1], 1), Pseq([20, 20], 1), -10),
+			\loop, 1,
+			\pan_pos, Pwhite(-1.0, 1.0),
+			\low_pass_mix, 1,
+			\low_pass_freq, Pseg(Pseq([13000, 8000], 1), Pseq([20, 20], 1), -10),
+			\high_pass_mix, 1,
+			\high_pass_freq, 30,
+			\out, 0,
+			\group, ~patterns,
 		);
-		).play(TempoClock(1));
+	).play(TempoClock(1));
 
 	~metal_stream_2 = Pdef(
-	\metal2,
-	Pbind(
-		\instrument, \pattern_buf,
-		\dur, Pwhite(1, 4),
-		\atk, Pwhite(0.1, 5),
-		\rel, Pwhite(6, 10),
-		\buf, Prand(m[\cringle][(0..0)]++m[\shake][(0..3)]++m[\scrape][(0..4)]++m[\bowed][(0..3)], inf),
-		\rate,  Prand([Pexprand(-0.1, -0.5), Pwhite(0.1, 0.5)], inf),
-		\stretch,  1,
-		\spos, Pwhite(0, 3000),
-		\amp, Pfunc({~metal_stream_val}),
-		\loop, 1,
-		\pan_pos, Pwhite(-1.0, 1.0),
-		\low_pass_mix, 1,
-		\low_pass_freq, 8000,
-		\high_pass_mix, 1,
-		\high_pass_freq, 100,
-		\out, 0,
-		\group, ~patterns,
+		\metal2,
+		Pbind(
+			\instrument, \pattern_buf,
+			\dur, Pwhite(1, 4),
+			\atk, Pwhite(0.1, 5),
+			\rel, Pwhite(6, 10),
+			\buf, Prand(m[\cringle][(0..0)]++m[\shake][(0..3)]++m[\scrape][(0..4)]++m[\bowed][(0..3)], inf),
+			\rate,  Prand([Pexprand(-0.1, -0.5), Pwhite(0.1, 0.5)], inf),
+			\stretch,  1,
+			\spos, Pwhite(0, 3000),
+			\amp, Pfunc({~metal_stream_val}),
+			\loop, 1,
+			\pan_pos, Pwhite(-1.0, 1.0),
+			\low_pass_mix, 1,
+			\low_pass_freq, 8000,
+			\high_pass_mix, 1,
+			\high_pass_freq, 100,
+			\out, 0,
+			\group, ~patterns,
 		);
-		).play(TempoClock(1));
-	});
+	).play(TempoClock(1));
+});

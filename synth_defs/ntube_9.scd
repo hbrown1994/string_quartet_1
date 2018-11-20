@@ -4,7 +4,7 @@ SynthDef(\ntube_9, {
 	    lossarray = ~loss_array_9;
 	    karray = ~k_array_9;
 	    delayarray = ~delay_array_9;
-		//in = In.ar(input_bus); // r1eplace with soundin for live sound
+
 	    in  = In.ar(input_bus);
 		env = EnvGen.kr(Env.adsr(atk, dec, sus, rel, curve: curve), gate, doneAction: 2);
 		in = HPF.ar(in, 50);
@@ -12,6 +12,7 @@ SynthDef(\ntube_9, {
 		sig = Limiter.ar(sig, 0.7);
 		sig = sig * RMS.kr(in).linlin(0.0, 0.1, 0.0, 0.8).clip(0.0, 0.8).lag(0.1);
 		sig = HPF.ar(sig, 100);
+
 		//FFT//
 		chain = FFT(LocalBuf(1024), sig);
 		chain = PV_MagSmooth(chain, 1 - RMS.ar(in).linlin(0.0, 0.1, 0.00001, 0.5));
@@ -19,8 +20,7 @@ SynthDef(\ntube_9, {
 		chain = PV_BinShift(chain, RMS.ar(in).linlin(0.0, 0.1, 0.5, 10));
 
 		fft_sig = IFFT(chain);
-		sig_mix = XFade2.ar(sig, fft_sig, RMS.kr(in).linlin(0.0, 0.1, mix_low, mix_high).clip(-1.0, 1.0)); /*fft_mix*/
-		//sig_mix = sig_mix * RMS.kr(in).linlin(0.0, 0.1, 0.5, 0.8).clip(0.2, 0.8).lag(0.1);
+		sig_mix = XFade2.ar(sig, fft_sig, RMS.kr(in).linlin(0.0, 0.1, mix_low, mix_high).clip(-1.0, 1.0));
 		sig_mix = sig_mix * amp.dbamp.lag(0.1) * env;
 		Out.ar(out, sig_mix);
 	}).add;

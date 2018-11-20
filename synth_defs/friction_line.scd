@@ -3,6 +3,7 @@
 		var sig, in, kernel, env, chain, fft_sig, sig_mix, trig;
 		in = In.ar(input_bus); // replace with soundin for live sound
 		env = EnvGen.kr(Env.adsr(atk, dec, sus, rel, curve: curve), gate, doneAction: 2);
+
 		//FRIC//
 		sig = Friction.ar(in,
 			friction: RMS.kr(in).linlin(0.0, 0.1, 5.41322e-5, 1.75584e-5).clip(lo: 1.75584e-5, hi: 5.41322e-5),
@@ -17,7 +18,8 @@
 		chain = PV_MagSmooth(chain, 1 - LFBrownNoise2.kr(10).range(0.001, 0.0001));
 	    fft_sig = IFFT(chain);
 
-		sig_mix = XFade2.ar(sig, fft_sig, Line.kr(line_start, line_end, line_dur)); /*fft_mix*/
+	    //MIX FRIC & FFT
+		sig_mix = XFade2.ar(sig, fft_sig, Line.kr(line_start, line_end, line_dur));
 
 		sig_mix = sig_mix * amp.dbamp.lag(0.1) * env;
 		Out.ar(out, sig_mix);

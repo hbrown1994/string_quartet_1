@@ -1,6 +1,7 @@
-	e.add(\48 -> {
-		c[1].children[47].value_(0);//Off
-	    c[1].children[48].value_(1);//On
+e.add(\48 -> {
+
+		c[1].children[47].value_(0);//Previous Cue Button Off
+	    c[1].children[48].value_(1);//Current Cue Button On
 
 		~glitch_stream = Pdef(
 	\glitch1,
@@ -37,4 +38,4 @@
 
 		}).play(AppClock)
 
-	});
+});
