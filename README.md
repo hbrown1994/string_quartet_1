@@ -11,6 +11,6 @@ How to run the computer part
 
 1. Make sure that your audio interface is set as the default input and output device for the computer
 2. For microphone, transducer, and speaker routing see “string_quartet_1_hunter_brown_routing_diagram.png“ in this folder.
-3. Open string_quartet_1_hunter_brown.scd
+3. Open "string_quartet_1_MAIN.scd"
 4. In menu bar navigate to the “Language” menu -> select “Evaluate File”
 5. See score for directions on how to operate the computer part
