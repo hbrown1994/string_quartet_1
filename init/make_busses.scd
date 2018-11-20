@@ -1,3 +1,4 @@
+//Audio busses for internal routing
 ~violin_1_fx_send = Bus.audio(s, 1);
 ~violin_2_fx_send = Bus.audio(s, 1);
 ~viola_fx_send = Bus.audio(s, 1);
