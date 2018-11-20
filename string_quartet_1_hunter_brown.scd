@@ -118,7 +118,7 @@ ServerBoot.add(~makeGui);
 ServerBoot.add(~makeBuffers); // "ServerBoot" happens when server boots.
 ServerQuit.add(~cleanup); // "ServerQuit" happens when server is Quit.
 
-/*______________________________________________ 8. Busses & SynthDefs ______________________________________________*/
+/*______________________________________________ 9. Busses & SynthDefs ______________________________________________*/
 
 s.waitForBoot({ // Wait to boot server once contained functions have been evaluated.
 
